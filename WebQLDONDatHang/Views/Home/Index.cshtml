@@ -1,0 +1,57 @@
+﻿@model IEnumerable<WebQLDONDatHang.Models.hanghoa>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/_LayoutPage1.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.mahang)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tenhang)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dvt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dongia)
+        </th>
+        <th>So Luong</th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+
+<tr>
+    <form action="@Url.Content("/Home/ChonMua")" method="post">
+        <td>
+            <input type="text" name="mahang" value="@item.mahang" class="form-control col-5" readonly="readonly" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tenhang)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dvt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dongia)
+        </td>
+        <td>
+            <input type="number" name="soluong" value="1" class="form-control   col-5" />
+        </td>
+        <td>
+          <input type="submit" class="btn btn-primary" value="Chọn Mua" />
+        </td>
+    </form>
+</tr>
+}
+
+</table>

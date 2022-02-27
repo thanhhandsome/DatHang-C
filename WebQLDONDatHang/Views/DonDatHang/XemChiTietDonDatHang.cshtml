@@ -1,0 +1,101 @@
+﻿@model WebQLDONDatHang.Models.hoadon
+
+@{
+    ViewBag.Title = "XemChiTietDonDatHang";
+    Layout = "~/Views/_LayoutPage1.cshtml";
+}
+
+<h2>Chi tiết hóa đơn </h2>
+<p>
+   
+    @Html.ActionLink("Trở về", "Index", "DonDatHang", null, new { @class = "btn btn-warning" })
+</p>
+
+<div>
+
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.sohd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sohd)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ngaylaphd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ngaylaphd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tenkh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tenkh)
+        </dd>
+
+    </dl>
+    <table class="table">
+        <tr>
+            <th>
+                Mã hàng
+            </th>
+            <th>
+                Đơn hàng
+            </th>
+            <th>
+                Đơn vị tính
+            </th>
+            <th>
+                Đơn giá
+            </th>
+            <th>
+                Số lượng 
+            </th>
+            <th>
+               Thành tiền
+            </th>
+        </tr>
+
+        @foreach (var item in Model.chitiethoadons)
+        {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.mahang)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.hanghoa.tenhang)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.hanghoa.dvt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dongia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.soluong)
+        </td>
+        <td>
+            @{double thanhtien = item.soluong.Value * item.dongia.Value;}
+            @Html.DisplayFor(modelItem => thanhtien)
+        </td>
+        
+    </tr>
+                }
+
+    </table>
+    <div class="row">
+        <div class="offset-md-6 col-md-2">
+            Tổng thành tiền
+        </div>
+        <div class="col-md-2">
+            @{double tongtien = Model.chitiethoadons.Sum(x => x.dongia.Value * x.soluong.Value); }
+            @tongtien
+        </div>
+    </div>
+</div>
+
